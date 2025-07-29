@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Interactivo - Desarrollador Web Full Stack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #333;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem; 
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            height: 1rem;
+            width: 1rem;
+            background-color: #a5b4fc;
+            border-radius: 9999px;
+            border: 2px solid #4f46e5;
+            transition: transform 0.3s;
+        }
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.2);
+        }
+        .timeline-line {
+            position: absolute;
+            left: 0.45rem;
+            top: 0.25rem;
+            bottom: 0;
+            width: 2px;
+            background-color: #e0e7ff;
+        }
+        .timeline-content {
+            cursor: pointer;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Mi Perfil Profesional</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#resumen" class="nav-link pb-1">Resumen</a>
+                <a href="#habilidades" class="nav-link pb-1">Habilidades</a>
+                <a href="#experiencia" class="nav-link pb-1">Experiencia</a>
+                <a href="#logros" class="nav-link pb-1">Logros</a>
+                <a href="#educacion" class="nav-link pb-1">Educación</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#resumen" class="block py-2 nav-link">Resumen</a>
+            <a href="#habilidades" class="block py-2 nav-link">Habilidades</a>
+            <a href="#experiencia" class="block py-2 nav-link">Experiencia</a>
+            <a href="#logros" class="block py-2 nav-link">Logros</a>
+            <a href="#educacion" class="block py-2 nav-link">Educación</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="resumen" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-2">Desarrollador Web Full Stack</h2>
+                <p class="text-lg text-gray-600">Especialista en Front-end con sólida capacidad Full Stack</p>
+            </div>
+            <div class="max-w-4xl mx-auto card p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Resumen Profesional</h3>
+                <p class="text-gray-700 leading-relaxed">
+                   Mi nombre es <b>Martín Alberto Torres</b>, Desarrollador web Full Stack con 4 años de experiencia, impulsado por una conexión innata con la tecnología desde la niñez y una pasión por la programación descubierta a los 28 años. Mi facilidad para la lógica y la resolución de problemas se ha cultivado a través de experiencias previas con scripts, HTML y CSS. He trabajado en proyectos de gran magnitud para clientes como Claro y ATM, desempeñándome principalmente como Full Stack. Mi orientación y especialidad es el desarrollo Front-end, pero poseo una sólida capacidad para respaldar tareas de Back-end con Java (Spring Boot) y PHP. Disfruto de la relación con las máquinas, desde los videojuegos hasta la mecánica de bajo nivel en la programación, buscando siempre crear soluciones innovadoras y de alto impacto.
+                </p>
+            </div>
+        </section>
+
+        <section id="habilidades" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Habilidades Técnicas</h2>
+                <p class="text-lg text-gray-600">Un vistazo a mi stack tecnológico.</p>
+            </div>
+            <div class="card p-4 sm:p-8">
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Experiencia Laboral</h2>
+                <p class="text-lg text-gray-600">Mi trayectoria profesional a lo largo del tiempo.</p>
+            </div>
+            <div class="max-w-3xl mx-auto relative">
+                <div class="timeline-line"></div>
+                <div id="timeline-container">
+                </div>
+            </div>
+        </section>
+
+        <section id="logros" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Logros Destacados</h2>
+                <p class="text-lg text-gray-600">Impactos y contribuciones clave en mis proyectos.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-4">🚀</span>
+                        <h3 class="text-xl font-bold text-gray-800">Optimización de Rendimiento</h3>
+                    </div>
+                    <p class="text-gray-700">En el proyecto de Claro, logré mejoras significativas en el rendimiento de la aplicación al reducir la lógica y el código innecesario, eliminando llamadas redundantes a otros servicios.</p>
+                </div>
+                <div class="card p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-4">🛡️</span>
+                        <h3 class="text-xl font-bold text-gray-800">Desarrollo de Funcionalidades Clave</h3>
+                    </div>
+                    <p class="text-gray-700">Contribuí activamente en el desarrollo de funcionalidades de seguridad críticas relacionadas con la privacidad de tarjetas de crédito y débito en aplicaciones de alto impacto.</p>
+                </div>
+                <div class="card p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-4">🔄</span>
+                        <h3 class="text-xl font-bold text-gray-800">Migración Tecnológica</h3>
+                    </div>
+                    <p class="text-gray-700">Participé en la migración de un sistema monolítico heredado en PHP a una arquitectura moderna basada en Java con Spring Boot para el Back-end y React.js para el Front-end.</p>
+                </div>
+                <div class="card p-8">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-4">🤝</span>
+                        <h3 class="text-xl font-bold text-gray-800">Colaboración en Equipo</h3>
+                    </div>
+                    <p class="text-gray-700">Fui un miembro proactivo en equipos de desarrollo, manteniendo un contacto constante con mis compañeros para recibir sugerencias y opiniones, lo que contribuyó a un flujo de trabajo colaborativo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="educacion" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Educación y Formación</h2>
+                <p class="text-lg text-gray-600">Mi base académica y aprendizaje continuo.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="card p-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tecnicatura en Programación Informática</h3>
+                    <p class="text-gray-600 font-medium">Universidad Provincial del Sudoeste</p>
+                    <p class="text-indigo-600 text-sm">Iniciado en Febrero, 2025 (Actualmente en curso)</p>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cursos y Certificaciones Relevantes</h3>
+                    <p class="text-gray-600 font-medium">Plataformas como Udemy</p>
+                    <p class="text-gray-700 mt-2">Formación continua en tecnologías como React, Angular, NestJS, Express.js, TypeScript, entre otros.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center">
+            <p>Diseño hecho por Martín Torres con ayuda de Geminí - 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (mobileMenu.offsetParent !== null) {
+                       mobileMenu.classList.add('hidden');
+                    }
+                    setTimeout(() => {
+                        const target = document.querySelector(e.target.getAttribute('href'));
+                        if(target) {
+                           target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 0);
+                });
+            });
+
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            sections.forEach(section => observer.observe(section));
+
+            const skillsData = {
+                labels: ['React.js / Next.js', 'Angular', 'JavaScript / TypeScript', 'HTML5 / CSS3', 'Java / Spring Boot', 'PHP', 'Bases de Datos (SQL/NoSQL)', 'Docker / Git'],
+                datasets: [{
+                    label: 'Nivel de Experiencia',
+                    data: [9, 6, 9, 9.5, 7, 7, 8, 6],
+                    backgroundColor: [
+                        'rgba(79, 70, 229, 0.7)',
+                        'rgba(79, 70, 229, 0.7)',
+                        'rgba(79, 70, 229, 0.7)',
+                        'rgba(79, 70, 229, 0.7)',
+                        'rgba(107, 114, 128, 0.7)',
+                        'rgba(107, 114, 128, 0.7)',
+                        'rgba(107, 114, 128, 0.7)',
+                        'rgba(156, 163, 175, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(79, 70, 229, 1)',
+                        'rgba(79, 70, 229, 1)',
+                        'rgba(79, 70, 229, 1)',
+                        'rgba(79, 70, 229, 1)',
+                        'rgba(107, 114, 128, 1)',
+                        'rgba(107, 114, 128, 1)',
+                        'rgba(107, 114, 128, 1)',
+                        'rgba(156, 163, 175, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            const skillsChartCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsChartCtx, {
+                type: 'bar',
+                data: skillsData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.raw;
+                                    let level = 'Conocimiento';
+                                    if (value >= 8) level = 'Avanzado';
+                                    else if (value >= 6) level = 'Experiencia Sólida';
+                                    return `${context.label}: ${level}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 10,
+                            display: false,
+                        },
+                        y: {
+                           ticks: {
+                               font: {
+                                   size: 14
+                               }
+                           }
+                        }
+                    }
+                }
+            });
+
+            const experienceData = [
+                {
+                    company: 'Think Solution Group',
+                    role: 'Desarrollador Web Full Stack',
+                    period: 'Abril 2025 – Julio 2025',
+                    location: 'Argentina (Remoto)',
+                    description: 'Continuidad en el proyecto de migración de un sistema de recaudación de impuestos, trabajando con Java Spring Boot y React.js.'
+                },
+                {
+                    company: 'Open Dev Solutions',
+                    role: 'Desarrollador Web Full Stack',
+                    period: 'Junio 2024 – Abril 2025',
+                    location: 'Argentina (Remoto)',
+                    description: 'Participación en la migración de un sistema monolítico en PHP hacia una arquitectura moderna con Java Spring Boot y React.js. Colaboración en el desarrollo de funcionalidades tanto en el Front-end como en el Back-end.'
+                },
+                {
+                    company: 'Global Logic LATAM',
+                    role: 'Desarrollador Web Full Stack',
+                    period: 'Agosto 2022 – Marzo 2024',
+                    location: 'Argentina (Remoto)',
+                    description: 'Proyecto para el cliente Claro, enfocado en ventas para agentes. Desarrollo y mantenimiento de aplicaciones, principalmente en Front-end con React, y tareas de respaldo en Back-end con Java.'
+                },
+                {
+                    company: 'Cooperativa Oyikil',
+                    role: 'Desarrollador Web y Operador',
+                    period: 'Noviembre 2021 – Agosto 2022',
+                    location: 'Río Turbio, Santa Cruz, Argentina',
+                    description: 'Desarrollo y mantenimiento de la página web de la empresa proveedora de internet, además de tareas operativas.'
+                },
+                {
+                    company: 'Lugo Consultora',
+                    role: 'Desarrollador Web Jr.',
+                    period: 'Enero 2020 – Julio 2020',
+                    location: 'Argentina (Remoto)',
+                    description: 'Primera experiencia como desarrollador web, trabajando bajo la supervisión de un mentor en diversos proyectos iniciales.'
+                }
+            ];
+
+            const timelineContainer = document.getElementById('timeline-container');
+            experienceData.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                timelineItem.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="card p-6">
+                            <time class="mb-1 text-sm font-normal leading-none text-indigo-500">${item.period}</time>
+                            <h3 class="text-lg font-semibold text-gray-900 mt-1">${item.role}</h3>
+                            <p class="text-base font-medium text-gray-600">${item.company} - ${item.location}</p>
+                            <div class="description hidden mt-4 text-gray-700">
+                                <p>${item.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+            
+            document.querySelectorAll('.timeline-content').forEach(item => {
+                item.addEventListener('click', () => {
+                    const description = item.querySelector('.description');
+                    description.classList.toggle('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
